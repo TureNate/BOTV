@@ -4,7 +4,7 @@ using UnityEngine;
 public class TowerUpgrade : MonoBehaviour
 {
     [System.Serializable]
-    class Level
+    public class Level
     {
         public float range = 8f;
         public int damage = 25;
@@ -13,7 +13,7 @@ public class TowerUpgrade : MonoBehaviour
 
     }
 
-    [SerializeField] private Level[] levels = new Level[3];
+    [SerializeField] public Level[] levels = new Level[3];
     [SerializeField] public int currentlevel = 0;
     [NonSerialized] public string CurrentCost;
 
@@ -37,6 +37,7 @@ public class TowerUpgrade : MonoBehaviour
             towerRange.UpdateRange();
 
             Player.main.gold -= levels[currentlevel].cost;
+            Player.main.GoldExpended += levels[currentlevel].cost;
 
             currentlevel++;
 

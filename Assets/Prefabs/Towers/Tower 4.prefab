@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5777697347135861342}
   - component: {fileID: 8662500437807177147}
   - component: {fileID: 3614747690397798598}
+  - component: {fileID: 2791567039717360896}
   m_Layer: 6
   m_Name: Tower 4
   m_TagString: Tower
@@ -52,6 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   TowerStats: {fileID: 11400000, guid: 23ed6fc9ff2ef3d449bbd09d997807c6, type: 2}
   Projectile: {fileID: 2490204621678367183, guid: f52901db634a2af4192e5000530f202a, type: 3}
+  TowerName: "\u041C\u0430\u0433-\u043C\u0435\u0447\u043D\u0438\u043A"
+  ImageTower: {fileID: -856085545168688419, guid: 58b2df0249a9b4247b0195fd427ea3ed, type: 3}
   range: 35
   damage: 25
   fireRate: 1
@@ -61,6 +64,7 @@ MonoBehaviour:
   first: 1
   last: 0
   strong: 0
+  canKrit: 1
 --- !u!114 &29966258778138877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +171,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2791567039717360896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76685539330595578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537082c2506afc64c848daa597b2c83f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlowDistanceLogic
+  slow:
+  - 5
+  - 10
+  - 20
+  - 25
+  targets: []
+  tower: {fileID: 76685539330595578}
+  Range: {fileID: 5329864889935810473}
 --- !u!1 &2681149477148675686
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,3 +445,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerRange
   Tower: {fileID: 162264898816300008}
+  targets: []

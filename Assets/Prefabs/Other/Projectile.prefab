@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileLogic
   target: {fileID: 0}
-  ProjectSpeed: 15
+  ProjectSpeed: 30
   damage: 25
 --- !u!50 &2763912609006603428
 Rigidbody2D:

@@ -1,9 +1,6 @@
-using NUnit.Framework;
-using UnityEditor.Build;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Rendering;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -15,6 +12,7 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private float TimeToWave = 10f;
     [SerializeField] public int wave = 1;
+    private int maxwave = 50;
     [SerializeField] private int enemyCount = 10;
     [SerializeField] private float enemyCountRate = 0.2f;
     [SerializeField] private float spawnDelayMin = 0.75f;
@@ -23,6 +21,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float zombieRate = 0.5f;
     [SerializeField] private float fastZombieRate = 0.4f;
     [SerializeField] private float hydraRate = 0.1f;
+
+    
 
 
     private bool wavedone = false;
@@ -40,6 +40,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
+        if (Player.main.isPlaying)
         SetWave();
     }
 
@@ -47,13 +48,15 @@ public class EnemyManager : MonoBehaviour
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        if (wavedone)
+        if (wavedone && wave <= maxwave)
         {
             wave++;
             wavedone = false;
             Invoke("SetWave", TimeToWave);
         }
         enemyLeft = enemies.Length;
+
+        
     }
     private void SetWave()
     {
@@ -107,7 +110,7 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < waveset.Count; i++)
         {
             Instantiate(waveset[i],spawnpoint.position,Quaternion.identity);
-            waveset[i].GetComponent<Enemy>().health = 100 + wave * 25; 
+            waveset[i].GetComponent<Enemy>().health = 100 + waveset[i].GetComponent<Enemy>().helthKop * wave; 
             yield return new WaitForSeconds(Random.Range(spawnDelayMin,spawnDelayMax));
         }
         wavedone = true;

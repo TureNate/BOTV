@@ -1,11 +1,9 @@
-using JetBrains.Annotations;
-using NUnit.Framework;
-using System;
-using System.Collections;
+
+
+
+
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,34 +16,13 @@ public class TowerPick : MonoBehaviour
 
     [Header("UI Tower Names")]
     [SerializeField] public List<TextMeshProUGUI> Towernames;
-    [SerializeField] public TextMeshProUGUI Towername2;
-    [SerializeField] public TextMeshProUGUI Towername3;
-
+    
     [Header("Towers Portrait")]
-    [SerializeField] public Image Towerportrait1;
-    [SerializeField] public Image Towerportrait2;
-    [SerializeField] public Image Towerportrait3;
-
+    [SerializeField] public List<Image> Towerportrait1;
+   
     [Header("UI Tower Costs")]
     [SerializeField] public List<TextMeshProUGUI> TowerCosts;
-    [SerializeField] public TextMeshProUGUI TowerCost2;
-    [SerializeField] public TextMeshProUGUI TowerCost3;
-
-    [Header("UI Towers Stihia")]
-    [SerializeField] public Image TowerStihia1;
-    [SerializeField] public Image TowerStihia2;
-    [SerializeField] public Image TowerStihia3;
-
-    [Header("UI Tower Type 1")]
-    [SerializeField] public Image TowerType1_1;
-    [SerializeField] public Image TowerType2_1;
-    [SerializeField] public Image TowerType3_1;
-
-    [Header("UI Tower Type 1")]
-    [SerializeField] public Image TowerType1_2;
-    [SerializeField] public Image TowerType2_2;
-    [SerializeField] public Image TowerType3_2;
-
+    
     private List<GameObject> Towerlist;
     private int[] rarecost = new int[2];
 
@@ -82,11 +59,13 @@ public class TowerPick : MonoBehaviour
         if (Player.main.gold >= rarecost[0] && Player.main.Towers.Length + 1 <= Player.main.TowerLimit)
         {
             Player.main.gold -= rarecost[0];
+            Player.main.GoldExpended += rarecost[0];
             Towerlist = TowerPickList(0);
             for (int i = 0; i < Towerlist.Count; i++)
             {
-                Towernames[i].text = Towerlist[i].name.Replace("(Clone)", "").Trim();
+                Towernames[i].text = Towerlist[i].GetComponent<Tower>().TowerName;
                 TowerCosts[i].text = Towerlist[i].GetComponent<Tower>().cost.ToString();
+                Towerportrait1[i].sprite = Towerlist[i].GetComponent<Tower>().ImageTower;
             }
             panel.SetActive(true);
             Debug.Log(Towerlist.ToString());

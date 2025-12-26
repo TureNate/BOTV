@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 public class CameraControl : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class CameraControl : MonoBehaviour
 
     private Vector3 Origin;
     private Vector3 Difference;
-    private Vector3 ResetCamera;
+
     private bool drag = false;
 
     void Start()

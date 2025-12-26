@@ -1,21 +1,14 @@
-using NUnit.Framework;
+
 using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
+
 using UnityEngine.EventSystems;
-using System.Collections;
+
 using System.Collections.Generic;
 
 public class TowerManager : MonoBehaviour
 {
-    [Header("Towers")]
-    [SerializeField] private GameObject Tower1;
-    [SerializeField] private GameObject Tower2;
-    [SerializeField] private GameObject Tower3;
-
     [SerializeField] private LayerMask towerLayer;
-
-
 
     [SerializeField] private GameObject panel;
     [SerializeField] private TextMeshProUGUI towerName;
@@ -64,7 +57,7 @@ public class TowerManager : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Player.main.isPlaying)
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 100f, towerLayer);
 
@@ -84,8 +77,8 @@ public class TowerManager : MonoBehaviour
                 range2.GetComponent<SpriteRenderer>().enabled = true;
 
                 panel.SetActive(true);
-                towerName.text = selectedTower.name.Replace("(Clone)", "").Trim();
-                towerLevel.text = "Tower LVL: " + selectedTower.GetComponent<TowerUpgrade>().currentlevel.ToString();
+                towerName.text = selectedTower.GetComponent<Tower>().TowerName;
+                towerLevel.text = "Башня ЛВЛ: " + selectedTower.GetComponent<TowerUpgrade>().currentlevel.ToString();
                 UpgradeCost.text = selectedTower.GetComponent<TowerUpgrade>().CurrentCost;
                 SellCost.text = selectedTower.GetComponent<Tower>().SellCost.ToString();
 
@@ -94,16 +87,16 @@ public class TowerManager : MonoBehaviour
 
                 if (tower.first)
                 {
-                    towerTargetting.text = "first";
+                    towerTargetting.text = "Первый";
                 }
                 else if (tower.last)
                 {
-                    towerTargetting.text = "last";
+                    towerTargetting.text = "Последний";
 
                 }
                 else if (tower.strong)
                 {
-                    towerTargetting.text = "strong";
+                    towerTargetting.text = "Сильнейший";
                 }
             }
 
@@ -157,7 +150,7 @@ public class TowerManager : MonoBehaviour
         if(selectedTower)
         {
             selectedTower.GetComponent<TowerUpgrade>().Upgrade();
-            towerLevel.text = "Tower LVL: " + selectedTower.GetComponent<TowerUpgrade>().currentlevel.ToString();
+            towerLevel.text = "Башня ЛВЛ: " + selectedTower.GetComponent<TowerUpgrade>().currentlevel.ToString();
             UpgradeCost.text = selectedTower.GetComponent<TowerUpgrade>().CurrentCost;
             SellCost.text = selectedTower.GetComponent<Tower>().SellCost.ToString();
         }
@@ -171,21 +164,21 @@ public class TowerManager : MonoBehaviour
             tower.first = false;
             tower.last = true;
             tower.strong = false;
-            towerTargetting.text = "Last";
+            towerTargetting.text = "Последний";
         }
         else if (tower.last)
         {
             tower.first = false;
             tower.last = false;
             tower.strong = true;
-            towerTargetting.text = "Strong";
+            towerTargetting.text = "Сильнейший";
         }
         else if(tower.strong)
         {
             tower.first = true;
             tower.last = false;
             tower.strong = false;
-            towerTargetting.text = "First";
+            towerTargetting.text = "Первый";
         }
     }
 }

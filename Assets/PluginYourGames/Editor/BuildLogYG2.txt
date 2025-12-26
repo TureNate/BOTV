@@ -1,0 +1,3 @@
+﻿Build path: D:/projectUnity/BOTVA/WebNewYear
+Build number: 5
+PluginYG version: 2.007

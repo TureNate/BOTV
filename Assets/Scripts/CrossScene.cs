@@ -15,8 +15,19 @@ public class CrossScene : MonoBehaviour
         
     }
 
-    public void MoveToScene()
+    public void RestartScene()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void MoveToSceneStart()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void MoveToSceneMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

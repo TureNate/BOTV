@@ -1,6 +1,5 @@
-using NUnit.Framework;
+
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class TowerRange : MonoBehaviour
@@ -98,6 +97,7 @@ public class TowerRange : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
+            collision.gameObject.GetComponent<Enemy>().movespeed = collision.gameObject.GetComponent<Enemy>().maxmovespeed;
             targets.Remove(collision.gameObject); 
         }
     }
